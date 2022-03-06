@@ -8,44 +8,49 @@ if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || pan
 
 // sem začni psát svůj program
 
-/* function panacekDoprava(udalost) {
-	let panacek = document.getElementById("panacek");
-	console.log(udalost);
-	panacek.style.left = "100px";
-}; */
-let panacek = document.getElementById("panacek");
-
 
 	window.addEventListener("load", ()=> {
+let panacek = document.getElementById("panacek");
+
 		panacek.style.position = "absolute";
-		panacek.style.left=10+"px";
-		panacek.style.top=10+"px";
+	panacek.style.left= 10+"px";
+	panacek.style.top= 50+"px";
+
 	});
 
 window.addEventListener("keydown", (e) => {
+	let panacek = document.getElementById("panacek");
+	let hlaska = "Tam nelze jít";
 	
 		switch (e.key) {
 			
 	 		case "ArrowLeft":
-				if (parseInt(panacek.style.left) >= 10 ) {panacek.style.left = parseInt(panacek.style.left) - 7 + "px";
-				break;} 
-				else {console.log("Tam nelze jít")}
-			
-				case "ArrowRight":
-					if (parseInt(panacek.style.right) >= 10 ) {panacek.style.left = parseInt(panacek.style.left) + 7 + "px";
-				break;}
-				else {console.log("Tam nelze jít")}
-			}
-
-	if (parseInt(panacek.style.top) >= 10 ) {
-			switch (e.key) {				
-			case "ArrowUp":
-				panacek.style.top = parseInt(panacek.style.top) - 7 + "px";
+				if (parseInt(panacek.style.left) > 7 ) {
+					panacek.style.left = parseInt(panacek.style.left) - 7 + "px";
+				} 
+				else {panacek.style.left=7+"px";
+					console.log(hlaska)};
 				break;
-			case "ArrowDown":
-				panacek.style.top = parseInt(panacek.style.top) + 7 + "px";
-				break};
-			} else {console.log("Tam nelze jít")};
 			
-		
-});
+			case "ArrowRight":
+				if (parseInt(panacek.style.left) < (parseInt(window.innerWidth)-70) ) {
+					panacek.style.left = parseInt(panacek.style.left) + 7 + "px";
+				}
+				else {console.log(hlaska)};
+			break;
+			
+			case "ArrowUp":
+				if (parseInt(panacek.style.top) > 50 ) {
+					panacek.style.top = parseInt(panacek.style.top) - 7 + "px";
+				}
+				else {console.log(hlaska)};
+			break;
+
+			case "ArrowDown":
+				if (parseInt(panacek.style.top) < (parseInt(window.innerHeight)-90) ) {
+					panacek.style.top = parseInt(panacek.style.top) + 7 + "px";
+				}
+				else {console.log(hlaska)};
+			break;
+				}
+			});
