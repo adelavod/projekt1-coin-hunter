@@ -7,18 +7,19 @@ if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || pan
 // sem začni psát svůj program
 
 
-	window.addEventListener("load", ()=> {
-let panacek = document.getElementById("panacek");
-panacek.style.position = "absolute";
-panacek.style.left= (parseInt(window.innerWidth)/2)+"px";
-panacek.style.top= (parseInt(window.innerHeight)/2)+"px";
+window.addEventListener("load", ()=> {
+	let panacek = document.getElementById("panacek");
+	panacek.style.position = "absolute";
+	panacek.style.left= (parseInt(window.innerWidth)/2)+"px"; //panacek se zobrazi uprostred stranky
+	panacek.style.top= (parseInt(window.innerHeight)/2)+"px"; // -\\-
+	let mince = document.getElementById("mince");
+	mince.style.position = "absolute";
 
-let mince = document.getElementById("mince");
-mince.style.position = "absolute";
-
-zobrazMinci();
+	zobrazMinci();
 });
+
 let scorecount = 0;
+
 function zobrazMinci() {
 	let mince = document.getElementById("mince");
 	// minceX, minceY - náhodné souřadnice pro zobrazení v okně
@@ -46,16 +47,17 @@ window.addEventListener("keydown", (e) => {
 
 	let score = document.getElementById("score");
 
-	
-	if (!((x + panacekSirka < minceX) || (minceX + minceSirka < x) || (y + panacekVyska < minceY) || (minceY + minceVyska < y))) {
-	playaudio("#zvukmince");
-
-	scorecount = scorecount + 1;
-	if (scorecount == 5){playaudio("#zvukfanfara")};
-	score.innerHTML = scorecount;
-	zobrazMinci();
+	// nasledujici if - spousti se, dojde-li k prekryvu panacka a mince
+	if (
+		!((x + panacekSirka < minceX) || (minceX + minceSirka < x) || (y + panacekVyska < minceY) || (minceY + minceVyska < y))) {
+	playaudio("#zvukmince"); //prehrava se zvuk mince
+	scorecount = scorecount + 1; //zvysi se score
+	if (scorecount == 5){playaudio("#zvukfanfara")}; //pri score 5 zazni fanfara
+	score.innerHTML = scorecount; //prepise se score
+	zobrazMinci(); // zobrazi se nova mince
 	};
 	
+	// switch - reaguje na stisk tlacitek sipek, pokud hrozi ze by vysel z okna pryc, pohyb se neprovede a spusti se console log
 	switch (e.key) {
 
 	 	case "ArrowLeft":
@@ -92,9 +94,11 @@ window.addEventListener("keydown", (e) => {
 	panacek.style.top = y + "px";
 	playaudio("#hudba");
 
+	// pouze kontrolni vypis promennych v console.log
 	console.log(panacekSirka, panacekVyska, minceSirka, minceVyska, minceX, minceY, x, y, scorecount);
-			});
+			}); 
 
+	// univerzalni funkce playaudio pouzitelna s ruznymi parametry(ruzne zvuky)
 	function playaudio(elementSelector) {
 		document.querySelector(elementSelector).play();
 	}
